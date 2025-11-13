@@ -5,21 +5,66 @@
     <title>Selecionar Colunas</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
+      href="{{ url_for('static', filename='output.css') }}"
     />
   </head>
-  <body>
-    <h2>Selecione as colunas</h2>
-    <form method="POST" action="/processar">
-      {% for c in columns %}
-      <label>
-        <input type="checkbox" name="colunas" value="{{ c }}" {% if
-        c.strip().lower() == 'cpf trabalhador' %}checked{% endif %} /> {{ c }} </label
-      ><br />
-      {% endfor %}
-      <input type="hidden" name="data" value="{{ data }}" />
-      <br /><br />
-      <button type="submit">Gerar CSV</button>
-    </form>
+  <body class="h-screen flex flex-col bg-gray-50">
+    <header class="p-6 text-center bg-white shadow">
+      <h1 class="text-3xl font-bold">Marque a coluna</h1>
+    </header>
+
+    <main class="flex-1 overflow-y-auto p-6">
+      <!-- Observe o id="columnsForm" -->
+      <form
+        id="columnsForm"
+        class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6"
+        method="POST"
+        action="/processar"
+      >
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {% for c in columns %}
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" name="colunas" value="{{ c }}" {% if
+            c.strip().lower() == 'cpf trabalhador' %}checked{% endif %}
+            class="h-4 w-4 text-blue-600 border-gray-300 rounded" />
+            <span class="text-gray-800 text-sm">{{ c }}</span>
+          </label>
+          {% endfor %}
+        </div>
+
+        <!-- hidden data -->
+        <input type="hidden" name="data" value="{{ data }}" />
+      </form>
+    </main>
+
+    <!-- Footer: botão fora do form, referenciando form="columnsForm" -->
+    <footer
+      class="sticky bottom-0 bg-white p-4 shadow-inner flex justify-center"
+    >
+      <button
+        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-semibold"
+        type="submit"
+        form="columnsForm"
+        id="submitColumnsBtn"
+      >
+        Gerar CSV
+      </button>
+    </footer>
+
+    <!-- Fallback JS: se por algum motivo o form attr não funcionar -->
+    <script>
+      document
+        .getElementById("submitColumnsBtn")
+        .addEventListener("click", function () {
+          // garante submissão (fallback). Só executa se o form existir.
+          var f = document.getElementById("columnsForm");
+          if (f) {
+            // browsers modernos respeitam form="id", mas este fallback força submit
+            f.submit();
+          }
+        });
+    </script>
+
+    <script src="/livereload.js?snipver=1"></script>
   </body>
 </html>
