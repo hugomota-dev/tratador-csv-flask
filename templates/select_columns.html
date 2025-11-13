@@ -5,12 +5,12 @@
     <title>Selecionar Colunas</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='output.css') }}"
+      href="{{ url_for('static', filename='css/output.css') }}"
     />
   </head>
   <body class="h-screen flex flex-col bg-gray-50">
     <header class="p-6 text-center bg-white shadow">
-      <h1 class="text-3xl font-bold">Marque a coluna</h1>
+      <h1 class="text-3xl font-bold underline">Marque a coluna:</h1>
     </header>
 
     <main class="flex-1 overflow-y-auto p-6">
@@ -66,5 +66,6 @@
     </script>
 
     <script src="/livereload.js?snipver=1"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>
