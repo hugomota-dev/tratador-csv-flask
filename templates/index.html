@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='output.css') }}"
+      href="{{ url_for('static', filename='css/output.css') }}"
     />
   </head>
   <body class="h-screen flex flex-col bg-gray-50">
@@ -17,7 +17,6 @@
 
     <!-- Conteúdo rolável -->
     <main class="flex-1 overflow-y-auto p-6 flex items-center justify-center">
-      
       <form
         id="uploadForm"
         class="max-w-md w-full bg-white rounded-lg shadow-md p-6"
@@ -30,11 +29,9 @@
             for="dropzone-file"
             class="relative cursor-pointer rounded-md bg-neutral-100 font-semibold text-indigo-400 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-indigo-500 hover:text-indigo-300 border border-dashed border-default-strong w-full"
           >
-          
             <div
               class="flex flex-col items-center justify-center text-body pt-5 pb-6"
             >
-            
               <svg
                 class="w-8 h-8 mb-4"
                 aria-hidden="true"
@@ -52,9 +49,11 @@
                   d="M15 17h3a3 3 0 0 0 0-6h-.025a5.56 5.56 0 0 0 .025-.5A5.5 5.5 0 0 0 7.207 9.021C7.137 9.017 7.071 9 7 9a4 4 0 1 0 0 8h2.167M12 19v-9m0 0-2 2m2-2 2 2"
                 />
               </svg>
-      
+
               <p class="mb-2 text-sm flex flex-col items-center justify-center">
-                <span class="font-semibold">Clique aqui para inserir o arquivo</span>
+                <span class="font-semibold"
+                  >Clique aqui para inserir o arquivo</span
+                >
                 <span class="text-xs">Somente arquivo CSV</span>
               </p>
             </div>
@@ -72,7 +71,9 @@
     </main>
 
     <!-- Botão fixo -->
-    <footer class="sticky bottom-0 bg-white p-4 shadow-inner flex justify-center">
+    <footer
+      class="sticky bottom-0 bg-white p-4 shadow-inner flex justify-center"
+    >
       <button
         class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-semibold"
         type="submit"
@@ -83,5 +84,6 @@
     </footer>
 
     <script src="/livereload.js?snipver=1"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>
