@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Selecionar Colunas</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <h2>Selecione as colunas</h2>
+    <form method="POST" action="/processar">
+      {% for c in columns %}
+      <label>
+        <input type="checkbox" name="colunas" value="{{ c }}" {% if
+        c.strip().lower() == 'cpf trabalhador' %}checked{% endif %} /> {{ c }} </label
+      ><br />
+      {% endfor %}
+      <input type="hidden" name="data" value="{{ data }}" />
+      <br /><br />
+      <button type="submit">Gerar CSV</button>
+    </form>
+  </body>
+</html>

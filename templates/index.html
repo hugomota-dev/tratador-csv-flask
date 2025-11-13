@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Upload de CSV</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Tratador de dados CSV</h1>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+      <h2>Selecione um arquivo CSV do seu computador:</h2>
+      <div class="button-section-fle">
+        <input type="file" name="file" accept=".csv" required />
+        Clique para upload
+      </div>
+      <button type="submit">Enviar</button>
+    </form>
+    <script src="/livereload.js?snipver=1"></script>
+  </body>
+</html>
