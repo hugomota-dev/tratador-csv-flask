@@ -61,10 +61,11 @@ def processar():
     )
 
 if __name__ == '__main__':
-    from livereload import Server
-    app.debug = True
-    server = Server(app)
-    server.watch('app.py')
-    server.watch('templates/*.html')
-    server.watch('static/*.css')
-    server.serve(host='127.0.0.1', port=5000, debug=True)
+   from livereload import Server
+   app.debug = True
+   server = Server(app)
+   server.watch('app.py')
+   server.watch('templates/*.html')
+   server.watch('static/*.css')
+   server.watch('static/js/*.js')
+   server.serve(host='127.0.0.1', port=5000, debug=True)
