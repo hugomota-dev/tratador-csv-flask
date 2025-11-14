@@ -1,33 +1,43 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const fileInput = document.getElementById("dropzone-file");
-    const label = fileInput.closest("label");
-    const spanTitle = label.querySelector("span.font-semibold");
-    const spanSubtitle = label.querySelector("span.text-xs");
+  // ===== INDEX.HTML - atualização do dropzone =====
+  const dropzoneInput = document.getElementById("dropzone-file");
+  if (dropzoneInput) {
+    dropzoneInput.addEventListener("change", () => {
+      if (dropzoneInput.files.length > 0) {
+        const dropzoneLabel = dropzoneInput.closest("label");
+        const spanBold = dropzoneLabel.querySelector("span.font-semibold");
+        const spanSmall = dropzoneLabel.querySelector("span.text-xs");
 
-    // Função para atualizar o label
-    function updateLabel(fileName) {
-        label.classList.remove("text-indigo-400");
-        label.classList.add("text-emerald-400");
-        spanTitle.textContent = `Arquivo ${fileName} inserido`;
-        spanSubtitle.textContent = ""; // remove subtítulo
-    }
+        // Altera o texto
+        spanBold.textContent = `Arquivo ${dropzoneInput.files[0].name} inserido`;
+        spanSmall.textContent = "";
 
-    // Verifica se já existe arquivo registrado na sessionStorage
-    const storedFileName = sessionStorage.getItem("uploadedFileName");
-    if (storedFileName) {
-        updateLabel(storedFileName);
-    }
-
-    // Evento de seleção do arquivo
-    fileInput.addEventListener("change", () => {
-        if (fileInput.files.length > 0) {
-            const fileName = fileInput.files[0].name;
-
-            // Atualiza interface
-            updateLabel(fileName);
-
-            // Armazena somente o nome do arquivo
-            sessionStorage.setItem("uploadedFileName", fileName);
-        }
+        // Altera a cor
+        dropzoneLabel.classList.remove("text-indigo-400");
+        dropzoneLabel.classList.add("text-emerald-400");
+      }
     });
+  }
+
+  // ===== SELECT_COLUMNS.HTML - gerar CSV sem recarregar =====
+  const columnsForm = document.getElementById("columnsForm");
+  const submitBtn = document.getElementById("submitColumnsBtn");
+
+  if (columnsForm && submitBtn) {
+    submitBtn.addEventListener("click", (e) => {
+      e.preventDefault(); // evita submissão do form
+
+      const formContainer = columnsForm.querySelector("div.grid");
+      if (formContainer) {
+        formContainer.innerHTML = ""; // remove as colunas
+      }
+
+      // Cria mensagem de sucesso dentro do form
+      let successMessage = document.createElement("p");
+      successMessage.textContent = "Arquivo gerado com sucesso!";
+      successMessage.className = "text-green-600 text-lg font-semibold text-center mt-6";
+
+      columnsForm.appendChild(successMessage);
+    });
+  }
 });
